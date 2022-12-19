@@ -1,8 +1,8 @@
 build image:
-  image: docker
+  image: docker:20.10.22
   services: 
-   - docker:dind
-   script:
-     - docker login -u $CI_REGISTRY_USER $CI_REGISTRY
-     - docker build -t $CI_REGISTRY_IMAGE .
-     - docker push $CI_REGISTRY_IMAGE 
+    - docker:20.10.22-dind
+  script:
+    - docker login -u $CI_REGISTRY_USER $CI_REGISTRY
+    - docker build -t $CI_REGISTRY_IMAGE .
+    - docker push $CI_REGISTRY_IMAGE
