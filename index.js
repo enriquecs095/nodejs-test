@@ -6,11 +6,11 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-const port = 1337
+const port = 3000
 app.listen(port, () => {
 })
 
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
    res.send('Hello World');
 });
 
