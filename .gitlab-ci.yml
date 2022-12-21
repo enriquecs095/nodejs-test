@@ -28,4 +28,4 @@ deploy:
     - main
   environment: 
     name: production
-    url: $CONTAINER_PRODUCTION_IMAGE:1.0
+    url: $CONTAINER_PRODUCTION_IMAGE
