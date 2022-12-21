@@ -23,5 +23,5 @@ deploy:
   script:    
     - ./deploy.sh
   only: 
-    main
+    - main
   environment: production
