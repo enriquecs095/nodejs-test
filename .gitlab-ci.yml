@@ -22,7 +22,8 @@ release-image:
 deploy:
   stage: deploy
   script:
-    - docker build -t $CONTAINER_PRODUCTION_IMAGE .
+    - docker pull $CONTAINER_RELEASE_IMAGE
+    - docker tag $CONTAINER_RELEASE_IMAGE $CONTAINER_PRODUCTION_IMAGE
     - docker push $CONTAINER_PRODUCTION_IMAGE
   only: 
     - main

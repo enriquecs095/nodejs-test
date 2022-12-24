@@ -10,6 +10,6 @@ RUN npm install && npm install cors
 # Bundle app source
 COPY . .
 
-EXPOSE 3000
+EXPOSE 1337
 CMD [ "node","index.js"] 
 
