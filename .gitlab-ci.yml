@@ -4,13 +4,15 @@ services:
 
 stages:
  - release 
+ - staging
  - deploy
 
 variables:
   VERSION_1_0: "1.0"
   LATEST_VERSION: "1.0"
   CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE
-  CONTAINER_LATEST_IMAGE: $CI_REGISTRY_IMAGE:latest
+  CONTAINER_PRODUCTION_IMAGE: $CI_REGISTRY_IMAGE:latest
+  CONTAINER_STAGING_IMAGE: $CI_REGISTRY_IMAGE/staging:latest
 
 before_script:
   - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
@@ -20,6 +22,19 @@ release-image-v-1-0:
   script:    
     - docker build -t $CONTAINER_RELEASE_IMAGE:$VERSION_1_0 .
     - docker push $CONTAINER_RELEASE_IMAGE:$VERSION_1_0 
+
+staging:
+  stage: staging
+  script:
+    - docker pull $CONTAINER_RELEASE_IMAGE:$LATEST_VERSION
+    - docker tag $CONTAINER_RELEASE_IMAGE:$LATEST_VERSION $CONTAINER_STAGING_IMAGE
+    - docker push $CONTAINER_STAGING_IMAGE
+  only: 
+    - main
+  environment: 
+    name: staging
+    url: $CONTAINER_STAGING_IMAGE
+
 
 deploy:
   stage: deploy
