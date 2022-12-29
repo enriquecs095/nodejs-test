@@ -20,7 +20,7 @@ before_script:
 release-image-v-1-0:
   stage: release
   script:    
-    - docker build -t $CONTAINER_RELEASE_IMAGE:$VERSION_1_0 .
+    - docker build -t $CONTAINER_RELEASE_IMAGE:$VERSION_1_0 . --build-arg WEB_APP_URL_ORIGIN=$WEB_APP_URL
     - docker push $CONTAINER_RELEASE_IMAGE:$VERSION_1_0 
 
 staging:
