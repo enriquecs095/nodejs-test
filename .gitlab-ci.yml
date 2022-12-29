@@ -23,7 +23,10 @@ release-image-v-1-0:
    - echo -e "DOMAIN_NAME=$DOMAIN_NAME_CI\nENVIRONMENT_NAME=$ENVIRONMENT_CI\nALIAS_NAME=$ALIAS_CI\n" > .env
   script:    
     - docker build -t $CONTAINER_RELEASE_IMAGE:$VERSION_1_0 .
-    - docker push $CONTAINER_RELEASE_IMAGE:$VERSION_1_0 
+    - docker push $CONTAINER_RELEASE_IMAGE:$VERSION_1_0
+  artifacts:
+    paths:
+      - .env
 
 staging:
   stage: staging
