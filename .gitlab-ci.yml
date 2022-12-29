@@ -19,9 +19,8 @@ before_script:
 
 release-image-v-1-0:
   stage: release
-  before_script: 
-   - echo -e "DOMAIN_NAME=$DOMAIN_NAME_CI\nENVIRONMENT_NAME=$ENVIRONMENT_CI\nALIAS_NAME=$ALIAS_CI\n" > .env
-  script:    
+  script:
+    - echo -e "DOMAIN_NAME=$DOMAIN_NAME_CI\nENVIRONMENT_NAME=$ENVIRONMENT_CI\nALIAS_NAME=$ALIAS_CI\n" > .env    
     - docker build -t $CONTAINER_RELEASE_IMAGE:$VERSION_1_0 .
     - docker push $CONTAINER_RELEASE_IMAGE:$VERSION_1_0
   artifacts:
