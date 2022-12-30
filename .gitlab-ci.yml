@@ -16,7 +16,7 @@ before_script:
 staging:
   stage: staging
   script:
-    - echo -e "DOMAIN_NAME=$DOMAIN_NAME_CI\nENVIRONMENT_NAME=$ENVIRONMENT_STAGING_CI\nALIAS_NAME=$ALIAS_STAGING_CI\n" > .env    
+    - echo -e "DOMAIN_NAME=$DOMAIN_NAME_CI\nENVIRONMENT_NAME=$ENVIRONMENT_STAGING_CI\nALIAS_NAME=$ALIAS_CI\n" > .env    
     - docker build -t  $CONTAINER_STAGING_IMAGE .
     - docker push $CONTAINER_STAGING_IMAGE
   only: 
@@ -29,7 +29,7 @@ staging:
 deploy:
   stage: deploy
   script:
-    - echo -e "DOMAIN_NAME=$DOMAIN_NAME_CI\nENVIRONMENT_NAME=$ENVIRONMENT_PRODUCTION_CI\nALIAS_NAME=$ALIAS_PRODUCTION_CI\n" > .env    
+    - echo -e "DOMAIN_NAME=$DOMAIN_NAME_CI\nENVIRONMENT_NAME=$ENVIRONMENT_PRODUCTION_CI\nALIAS_NAME=$ALIAS_CI\n" > .env    
     - docker build -t  $CONTAINER_PRODUCTION_IMAGE .
     - docker push $CONTAINER_PRODUCTION_IMAGE
   only: 
