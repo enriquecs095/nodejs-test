@@ -3,32 +3,21 @@ services:
   - docker:20.10.22-dind
 
 stages:
- - release 
  - staging
  - deploy
 
 variables:
-  VERSION_1_0: "1.0"
-  LATEST_VERSION: "1.0"
-  CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE
-  CONTAINER_PRODUCTION_IMAGE: $CI_REGISTRY_IMAGE:latest
-  CONTAINER_STAGING_IMAGE: $CI_REGISTRY_IMAGE/staging:latest
+  CONTAINER_PRODUCTION_IMAGE: $CI_REGISTRY_IMAGE/production:1.0
+  CONTAINER_STAGING_IMAGE: $CI_REGISTRY_IMAGE/staging:1.0
 
 before_script:
   - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
 
-release-image-v-1-0:
-  stage: release
-  script:
-    - echo -e "DOMAIN_NAME=$DOMAIN_NAME_CI\nENVIRONMENT_NAME=$ENVIRONMENT_CI\nALIAS_NAME=$ALIAS_CI\n" > .env    
-    - docker build -t $CONTAINER_RELEASE_IMAGE:$VERSION_1_0 .
-    - docker push $CONTAINER_RELEASE_IMAGE:$VERSION_1_0
-
 staging:
   stage: staging
   script:
-    - docker pull $CONTAINER_RELEASE_IMAGE:$LATEST_VERSION
-    - docker tag $CONTAINER_RELEASE_IMAGE:$LATEST_VERSION $CONTAINER_STAGING_IMAGE
+    - echo -e "DOMAIN_NAME=$DOMAIN_NAME_CI\nENVIRONMENT_NAME=$ENVIRONMENT_STAGING_CI\nALIAS_NAME=$ALIAS_STAGING_CI\n" > .env    
+    - docker build -t  $CONTAINER_STAGING_IMAGE .
     - docker push $CONTAINER_STAGING_IMAGE
   only: 
     - main
@@ -40,8 +29,8 @@ staging:
 deploy:
   stage: deploy
   script:
-    - docker pull $CONTAINER_RELEASE_IMAGE:$LATEST_VERSION
-    - docker tag $CONTAINER_RELEASE_IMAGE:$LATEST_VERSION $CONTAINER_PRODUCTION_IMAGE
+    - echo -e "DOMAIN_NAME=$DOMAIN_NAME_CI\nENVIRONMENT_NAME=$ENVIRONMENT_PRODUCTION_CI\nALIAS_NAME=$ALIAS_PRODUCTION_CI\n" > .env    
+    - docker build -t  $CONTAINER_PRODUCTION_IMAGE .
     - docker push $CONTAINER_PRODUCTION_IMAGE
   only: 
     - main
