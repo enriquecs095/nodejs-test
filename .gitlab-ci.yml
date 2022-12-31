@@ -25,7 +25,6 @@ staging:
     name: staging
     url: $CONTAINER_STAGING_IMAGE
 
-
 deploy:
   stage: deploy
   script:

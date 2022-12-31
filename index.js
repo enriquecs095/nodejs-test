@@ -10,8 +10,9 @@ app.use(bodyParser.urlencoded({extended: true}));
 const ORIGIN = `https://${process.env.ALIAS_NAME}.${process.env.ENVIRONMENT_NAME}.${process.env.DOMAIN_NAME}`
 
 app.use(function(req, res, next) {
+   res.header("Content-Type","application/json")
    res.header("Access-Control-Allow-Origin", ORIGIN);
-   res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, OPTIONS");
+   res.header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
    next();
  });
@@ -21,6 +22,6 @@ app.listen(port, () => {
 })
 
 app.get('/api', (req, res) => {
-   res.send('Hello World');
+   res.send({'message':'Hello World'});
 });
 
