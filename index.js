@@ -10,9 +10,7 @@ const port = 1337
 app.listen(port, () => {
 })
 
-console.log(ORIGIN)
-
 app.get('/api', (req, res) => {
-   res.send({'message':'Hello World'});
+   res.send({'message':'Hello World: ${ORIGIN}'});
 });
 
