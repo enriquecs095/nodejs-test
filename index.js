@@ -6,10 +6,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 const port = 1337
 
-app.listen(port, function(error) {
-    if (err) console.log(err);
-    console.log("Server listening on PORT", port);
-});
+app.listen(port, () => {
+})
 
 app.get('/api', (req, res) => {
   const ORIGIN = `https://${process.env.ALIAS_NAME}.${process.env.ENVIRONMENT_NAME}.${process.env.DOMAIN_NAME}`;
