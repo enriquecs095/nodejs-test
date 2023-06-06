@@ -30,7 +30,7 @@ jobs:
       with:
         push: true
         tags: |
-          ghcr.io/${{ github.repository }}:${{ steps.short_sha.outputs.name }} 
+          ghcr.io/${{ github.repository }}:${{ steps.short_sha.outputs.sha }} 
           ghcr.io/${{ github.repository }}:latest
       env:
         DOMAIN_NAME: $DOMAIN_NAME
