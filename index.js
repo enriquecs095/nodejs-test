@@ -5,12 +5,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 const port = 1337
+const ORIGIN = `https://${process.env.ALIAS_NAME}.${process.env.ENVIRONMENT_NAME}.${process.env.DOMAIN_NAME}`;
 
 app.listen(port, () => {
 })
 
 app.get('/api', (req, res) => {
-  const ORIGIN = `https://${process.env.ALIAS_NAME}.${process.env.ENVIRONMENT_NAME}.${process.env.DOMAIN_NAME}`;
   res.send({'message': 'Hello World', 'origin': ORIGIN});
 });
 
