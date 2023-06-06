@@ -1,0 +1,38 @@
+name: Deploying nodejs action
+
+on: 
+  push:
+    branches: main
+  
+  
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      
+    - name: login the container registry
+      uses: docker/login-action@v2
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+      
+    - name: Get the short sha of the current commit 
+      id: short_sha
+      run: echo "::set-output name=sha::$( echo $GITHUB_SHA | cut -c1-7)"
+      
+    - name: Build and push docker image
+      uses: docker/build-push-action@v2
+      with:
+        push: true
+        tags: |
+          ghcr.io/${{ github.repository }}:${{ steps.short_sha.outputs.name }} 
+          ghcr.io/${{ github.repository }}:latest
+      env:
+        DOMAIN_NAME: $DOMAIN_NAME
+        ENVIRONMENT_NAME: $ENVIRONMENT_NAME
+        ALIAS_NAME: $ALIAS_NAME
