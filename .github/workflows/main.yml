@@ -33,6 +33,6 @@ jobs:
           ghcr.io/${{ github.repository }}:${{ steps.short_sha.outputs.sha }} 
           ghcr.io/${{ github.repository }}:latest
       env:
-        DOMAIN_NAME: $DOMAIN_NAME
-        ENVIRONMENT_NAME: $ENVIRONMENT_NAME
-        ALIAS_NAME: $ALIAS_NAME
+        DOMAIN_NAME: ${{ secrets.DOMAIN_NAME }}
+        ENVIRONMENT_NAME: ${{ secrets.ENVIRONMENT_NAME }}
+        ALIAS_NAME: ${{ secrets.ALIAS_NAME }}
