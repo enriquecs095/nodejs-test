@@ -11,7 +11,7 @@ app.listen(port, () => {
 })
 
 app.get('/api', (req, res) => {
-  res.send({'message': 'Hello World', 'origin': ORIGIN});
+  res.send({'message': 'Hello World','port': port ,'origin': ORIGIN});
 });
 
 
