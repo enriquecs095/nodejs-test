@@ -20,6 +20,14 @@ jobs:
         registry: ghcr.io
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Create the env file
+      run: |
+        touch .env
+          echo DOMAIN_NAME=${{ secrets.DOMAIN_NAME }} >> .env
+          echo ENVIRONMENT_NAME=${{ secrets.ENVIRONMENT_NAME }} >> .env
+          echo ALIAS_NAME=${{ secrets.ALIAS_NAME }} >> .env
+          cat .env
       
     - name: Get the short sha of the current commit 
       id: short_sha
@@ -29,11 +37,7 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         push: true
+        context: .
         tags: |
           ghcr.io/${{ github.repository }}:${{ steps.short_sha.outputs.sha }} 
           ghcr.io/${{ github.repository }}:latest
-        run: |
-          touch .env
-          echo DOMAIN_NAME=${{ secrets.DOMAIN_NAME }} >> .env
-          echo ENVIRONMENT_NAME=${{ secrets.ENVIRONMENT_NAME }} >> .env
-          echo ALIAS_NAME=${{ secrets.ALIAS_NAME }} >> .env
