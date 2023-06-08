@@ -24,10 +24,9 @@ jobs:
     - name: Create the env file
       run: |
         touch .env
-          echo DOMAIN_NAME=${{ secrets.DOMAIN_NAME }} >> .env
-          echo ENVIRONMENT_NAME=${{ secrets.ENVIRONMENT_NAME }} >> .env
-          echo ALIAS_NAME=${{ secrets.ALIAS_NAME }} >> .env
-          cat .env
+        echo DOMAIN_NAME=${{ secrets.DOMAIN_NAME }} >> .env
+        echo ENVIRONMENT_NAME=${{ secrets.ENVIRONMENT_NAME }} >> .env
+        echo ALIAS_NAME=${{ secrets.ALIAS_NAME }} >> .env
       
     - name: Get the short sha of the current commit 
       id: short_sha
