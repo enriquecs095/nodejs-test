@@ -9,6 +9,10 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     
+    outputs:
+        image-sha: ghcr.io/${{ github.repository }}:${{ steps.short_sha.outputs.sha }}
+        image-env: ghcr.io/${{ github.repository }}:dev
+    
     steps:
     
     - name: Checkout repository
