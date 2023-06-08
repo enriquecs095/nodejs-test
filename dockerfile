@@ -6,7 +6,7 @@ WORKDIR /usr/src/app
 # Install app dependencies
 COPY package*.json ./
 #install dependencies
-RUN npm install && npm install cors && npm install dotenv
+RUN npm install && npm install cors
 # Bundle app source
 COPY . .
 
