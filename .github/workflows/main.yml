@@ -40,3 +40,4 @@ jobs:
         tags: |
           ghcr.io/${{ github.repository }}:${{ steps.short_sha.outputs.sha }} 
           ghcr.io/${{ github.repository }}:latest
+
