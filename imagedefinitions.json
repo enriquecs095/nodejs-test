@@ -1,0 +1,6 @@
+[
+  {
+    "name": "whoami",
+    "imageUri": "traefik/whoami:latest"
+  }
+]
